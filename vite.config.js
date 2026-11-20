@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/invoice_generator/', // change this to your GitHub repo name
+  base: '/Invoice_Generator/', // change this to your GitHub repo name
 })
