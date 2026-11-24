@@ -38,6 +38,7 @@ export default function App() {
               <FileText size={14} className="text-white" />
             </div>
             <span className="text-white font-semibold text-sm tracking-wide">InvoiceGen</span>
+            <span className="text-slate-500 text-xs hidden lg:block">— 100% local, no data leaves your browser</span>
           </div>
 
           {/* Right side actions */}
@@ -47,15 +48,17 @@ export default function App() {
             <div className="flex lg:hidden bg-white/10 rounded-lg p-0.5">
               <button
                 onClick={() => setMobileView('form')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${mobileView === 'form' ? 'bg-white text-slate-800' : 'text-slate-400'
-                  }`}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
+                  mobileView === 'form' ? 'bg-white text-slate-800' : 'text-slate-400'
+                }`}
               >
                 Form
               </button>
               <button
                 onClick={() => setMobileView('preview')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${mobileView === 'preview' ? 'bg-white text-slate-800' : 'text-slate-400'
-                  }`}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${
+                  mobileView === 'preview' ? 'bg-white text-slate-800' : 'text-slate-400'
+                }`}
               >
                 <Eye size={12} /> Preview
               </button>
