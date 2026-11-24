@@ -38,7 +38,6 @@ export default function App() {
               <FileText size={14} className="text-white" />
             </div>
             <span className="text-white font-semibold text-sm tracking-wide">InvoiceGen</span>
-            <span className="text-slate-500 text-xs hidden lg:block">— 100% local, no data leaves your browser</span>
           </div>
 
           {/* Right side actions */}
