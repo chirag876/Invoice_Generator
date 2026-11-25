@@ -11,12 +11,13 @@ import { ItemsTab } from './components/InvoiceForm/ItemsTab'
 import { NotesTab } from './components/InvoiceForm/NotesTab'
 import { StyleTab } from './components/InvoiceForm/StyleTab'
 import { InvoicePreview } from './components/InvoicePreview/InvoicePreview'
-
+import { TemplateActions } from './components/InvoiceForm/TemplateActions'
+import { PaymentTab } from './components/InvoiceForm/PaymentTab'
 export default function App() {
   const {
     invoice, updateInvoice, updateSender, updateReceiver,
     addItem, updateItem, removeItem,
-    setSignature, clearSignature, resetInvoice,
+    setSignature, clearSignature, resetInvoice, importInvoice,
   } = useInvoice()
 
   const { downloadPDF, exporting } = useExport(invoice)
@@ -24,6 +25,7 @@ export default function App() {
 
   // Mobile: 'form' | 'preview'
   const [mobileView, setMobileView] = useState('form')
+
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
@@ -47,17 +49,15 @@ export default function App() {
             <div className="flex lg:hidden bg-white/10 rounded-lg p-0.5">
               <button
                 onClick={() => setMobileView('form')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${
-                  mobileView === 'form' ? 'bg-white text-slate-800' : 'text-slate-400'
-                }`}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors ${mobileView === 'form' ? 'bg-white text-slate-800' : 'text-slate-400'
+                  }`}
               >
                 Form
               </button>
               <button
                 onClick={() => setMobileView('preview')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${
-                  mobileView === 'preview' ? 'bg-white text-slate-800' : 'text-slate-400'
-                }`}
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${mobileView === 'preview' ? 'bg-white text-slate-800' : 'text-slate-400'
+                  }`}
               >
                 <Eye size={12} /> Preview
               </button>
@@ -100,7 +100,12 @@ export default function App() {
             w-full lg:w-[520px]
           `}
           style={{ height: 'calc(100vh - 56px)' }}
+
         >
+          <TemplateActions
+            invoice={invoice}
+            onImport={importInvoice}
+          />
           <TabNav active={activeTab} onChange={setActiveTab} />
 
           <div className="flex-1 overflow-y-auto scrollbar-thin">
@@ -121,6 +126,12 @@ export default function App() {
             )}
             {activeTab === 'notes' && (
               <NotesTab invoice={invoice} onChange={updateInvoice} />
+            )}
+            {activeTab === 'payment' && (
+              <PaymentTab
+                invoice={invoice}
+                onChange={updateInvoice}
+              />
             )}
             {activeTab === 'style' && (
               <StyleTab invoice={invoice} onChange={updateInvoice} />
@@ -147,7 +158,10 @@ export default function App() {
         <div
           className={`
             flex-1 overflow-y-auto scrollbar-thin bg-slate-100 p-3 sm:p-5
-            ${mobileView === 'preview' ? 'flex flex-col' : 'hidden'} lg:block
+            ${mobileView === 'preview'
+              ? 'flex flex-col'
+              : 'absolute -left-[10000px] top-0 w-[794px]'
+            } lg:static lg:w-auto lg:block
           `}
           style={{ height: 'calc(100vh - 56px)' }}
         >
@@ -162,7 +176,7 @@ export default function App() {
 
             {/* Scale down preview on small screens so invoice fits */}
             <div className="overflow-x-auto">
-              <div className="min-w-[600px]">
+              <div className="w-[794px]">
                 <InvoicePreview invoice={invoice} />
               </div>
             </div>

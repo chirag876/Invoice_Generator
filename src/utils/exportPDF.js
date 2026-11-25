@@ -5,11 +5,21 @@ export async function exportToPDF(elementId, fileName = 'invoice.pdf') {
   const element = document.getElementById(elementId)
   if (!element) throw new Error('Preview element not found')
 
+  await document.fonts.ready
+
+  await Promise.all(
+    Array.from(element.querySelectorAll('img')).map(
+      (img) => img.decode().catch(() => { })
+    )
+  )
   const canvas = await html2canvas(element, {
-    scale: 2,
+    scale: 3,
     useCORS: true,
     backgroundColor: '#ffffff',
     logging: false,
+    windowWidth: 1200,
+    scrollX: 0,
+    scrollY: 0,
   })
 
   const imgData = canvas.toDataURL('image/png')

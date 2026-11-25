@@ -52,7 +52,23 @@ export const DEFAULT_INVOICE = {
   discountValue: 0,
   shippingEnabled: false,
   shippingValue: 0,
+  qrCode: {
+    enabled: false,
+    type: 'link',
+    url: '',
+    label: '',
+    upiId: '',
+    payeeName: '',
+    amountINR: '',
+  },
 
+  bankDetails: {
+    enabled: false,
+    bankName: '',
+    accountNumber: '',
+    ifscCode: '',
+    accountHolderName: '',
+  },
   signatureDataUrl: null,
   signatureName: '',
 }

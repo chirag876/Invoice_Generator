@@ -6,6 +6,7 @@
   * {
     box-sizing: border-box;
   }
+
   body {
     font-family: 'Inter', system-ui, sans-serif;
     background-color: #f1f5f9;
@@ -19,12 +20,15 @@
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
   }
+
   .scrollbar-thin::-webkit-scrollbar {
     width: 4px;
   }
+
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
   }
+
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background-color: #cbd5e1;
     border-radius: 2px;
@@ -41,5 +45,18 @@
 @media print {
   .no-print {
     display: none !important;
+  }
+}
+
+#invoice-preview-render {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
   }
 }
